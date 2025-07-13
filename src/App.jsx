@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 
 function Form() {
-  const [data, setData] = useState([{ name: "", email: "", message: "" }]);
+  // form using preventDefault
+  const [data, setData] = useState({ name: "", email: "", message: "" });
+
   const handleChange = (e) => {
-    e.preventDefault();
-    // Destructure name and value from the event target
     const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-  console.log(data);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitted Data:", data);
+    // You can add submission logic here (e.g., API call)
+  };
+
   return (
     <div>
-      <form className="flex flex-col gap-4 w-1/2 mx-auto mt-10">
+      <form
+        className="flex flex-col gap-4 w-1/2 mx-auto mt-10"
+        onSubmit={handleSubmit}
+      >
         <label className="text-lg font-semibold">Name</label>
         <input
           type="text"
